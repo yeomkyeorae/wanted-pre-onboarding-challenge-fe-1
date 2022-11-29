@@ -7,7 +7,7 @@ module.exports = {
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "airbnb/hook",
+        "airbnb/hooks",
         "airbnb-typescript",
         "prettier"
     ],

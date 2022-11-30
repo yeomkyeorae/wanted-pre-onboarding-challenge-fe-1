@@ -21,7 +21,9 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "html",
+        "import"
     ],
     "rules": {
         "import/extensions": [

@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
 	mode: 'development',
-	entry: './main.tsx',
+	entry: './src/index.tsx',
 	devtool: 'inline-source-map',
 	output: {
 		path: path.join(__dirname, '/dist'),

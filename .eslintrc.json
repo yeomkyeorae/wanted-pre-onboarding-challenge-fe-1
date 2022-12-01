@@ -26,8 +26,13 @@
         "import"
     ],
     "rules": {
-        "@typescript-eslint/no-var-requires": 0
+        "@typescript-eslint/no-var-requires": 0,
+        "import/no-unresolved": "off"
     },
-    "ignorePatterns": ["webpack.config.js"]
-
+    "ignorePatterns": ["webpack.config.js"],
+    "settings": {
+        "import/resolver": {
+          "typescript": {}
+        }
+    }
 }

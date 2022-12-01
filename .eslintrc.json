@@ -26,16 +26,6 @@
         "import"
     ],
     "rules": {
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-                "js": "never",
-                "jsx": "never",
-                "ts": "never",
-                "tsx": "never"
-            }
-        ],
         "@typescript-eslint/no-var-requires": 0
     },
     "ignorePatterns": ["webpack.config.js"]

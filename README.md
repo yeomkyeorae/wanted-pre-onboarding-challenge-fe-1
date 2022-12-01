@@ -1,6 +1,6 @@
 # react-typescript-template
 
-template 개별 사항 정리 예정!
+template 개별 사항 정리 예정!!!
 
 ### 참고
 - https://medium.com/@abuduabiodunsulaiman/setup-react-app-with-webpack-ts-and-js-da80cf3b7278

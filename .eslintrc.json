@@ -37,5 +37,7 @@
             }
         ],
         "@typescript-eslint/no-var-requires": 0
-    }
+    },
+    "ignorePatterns": ["webpack.config.js"]
+
 }

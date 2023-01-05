@@ -12,7 +12,8 @@
     "paths": {
       "@/*": ["*"],
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": ["DOM"]
   },
   "include": ["src/**/*"]
 }

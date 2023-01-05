@@ -11,7 +11,14 @@ module.exports = {
 		filename: 'bundle.js',
 	},
 	devServer: {
+		proxy: {
+			'/': {
+				target: 'http://localhost:8080',
+				changeOrigin: true
+			}
+		},
 		static: './dist',
+		historyApiFallback: true
 	},
 	module: {
 		rules: [
@@ -35,5 +42,5 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './index.html',
 		}),
-	],
+	]
 };

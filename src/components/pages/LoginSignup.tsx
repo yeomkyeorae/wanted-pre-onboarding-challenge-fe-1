@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { loginUser, registerUser } from '../../_actions/user_action';
+import { HistoryProps } from './interfaces';
 
 const Container = styled.div`
 	width: 280px;
@@ -14,11 +15,7 @@ const Container = styled.div`
 	text-align: center;
 `;
 
-interface Props extends RouteComponentProps {
-	history: RouteComponentProps['history'];
-}
-
-function Login({ history }: Props) {
+function Login({ history }: HistoryProps) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoginPage, setIsLoginPage] = useState(true);

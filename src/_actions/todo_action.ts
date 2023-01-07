@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_TODO, GET_TODOS } from './types';
+import { CREATE_TODO, GET_TODOS, DELETE_TODO } from './types';
 
 export function createTodo(
 	body: { title: string; content: string },
@@ -26,6 +26,16 @@ export function getTodos(token: string): {
 
 	return {
 		type: GET_TODOS,
+		payload: data,
+	};
+}
+
+export function deleteTodo(token: string, id: string): { type: string; payload: Promise<{ data: null }> } {
+	const headers = { Authorization: token };
+	const data = axios.delete(`/todos/${id}`, { headers });
+
+	return {
+		type: DELETE_TODO,
 		payload: data,
 	};
 }

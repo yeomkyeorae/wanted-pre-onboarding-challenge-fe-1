@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { loginUser, registerUser } from '../../_actions/user_action';
-import { HistoryProps } from './interfaces';
+import { HistoryProps } from '../interfaces';
 
 const Container = styled.div`
 	width: 280px;

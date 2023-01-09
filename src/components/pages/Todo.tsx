@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { HistoryProps, Todo } from '../interfaces';
 import { createTodo, getTodos } from '../../_actions/todo_action';
 import Todolist from '../containers/TodoList';
+import TodoInput from '../containers/TodoInput';
 
 const Logout = styled.div`
 	position: absolute;
@@ -18,7 +19,6 @@ const Logout = styled.div`
 
 const Container = styled.div`
 	display: flex;
-	/* height: 80vh; */
 	justify-content: center;
 	align-items: center;
 `;
@@ -39,29 +39,8 @@ const Button = styled.button`
 	cursor: pointer;
 `;
 
-const inputStyles = `
-	border: 1px solid black;
-	border-radius: 15px;
-	box-shadow: 5px 10px 20px rgb(0, 0, 0, 0.2);
-	height: 20px;
-	width: 300px;
-	margin-bottom: 3px;
-	text-align: center;
-`;
-
-const Input = styled.input`
-	${inputStyles}
-`;
-
-const ContentTextArea = styled.textarea`
-	${inputStyles}
-	height: 150px;
-`;
-
 function Todo({ history }: HistoryProps) {
 	const [openAddInput, setOpenAddInput] = useState(false);
-	const [newTodoTitle, setNewTodoTitle] = useState('');
-	const [newTodoContent, setNewTodoContent] = useState('');
 	const [todoList, setTodoList] = useState<Todo[]>([]);
 
 	const dispatch = useDispatch<any>();
@@ -85,27 +64,17 @@ function Todo({ history }: HistoryProps) {
 			setOpenAddInput(true);
 		} else {
 			setOpenAddInput(false);
-			setNewTodoTitle('');
-			setNewTodoContent('');
 		}
 	};
 
-	const onNewTodoTitleHandler = (e: React.FormEvent<HTMLInputElement>) => {
-		setNewTodoTitle(e.currentTarget.value);
-	};
-
-	const onNewTodoContentHandler = (e: React.FormEvent<HTMLTextAreaElement>) => {
-		setNewTodoContent(e.currentTarget.value);
-	};
-
-	const onCreateSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+	const onCreateSubmitHandler = (e: React.FormEvent<HTMLFormElement>, todoTitle: string, todoContent: string) => {
 		e.preventDefault();
 
 		setOpenAddInput(false);
 
 		const body = {
-			title: newTodoTitle,
-			content: newTodoContent,
+			title: todoTitle,
+			content: todoContent,
 		};
 
 		dispatch(createTodo(body, token)).then((response: any) => {
@@ -123,21 +92,7 @@ function Todo({ history }: HistoryProps) {
 					<Button onClick={addBtnListener} style={{ width: '20%', marginBottom: '5px' }}>
 						추가
 					</Button>
-					{openAddInput ? (
-						<>
-							<form onSubmit={onCreateSubmitHandler} style={{ textAlign: 'center' }}>
-								<Input type="text" value={newTodoTitle} onChange={onNewTodoTitleHandler} placeholder="Todo 제목" />
-								<br />
-								<ContentTextArea
-									value={newTodoContent}
-									onChange={(e) => onNewTodoContentHandler(e)}
-									placeholder="내용"
-								/>
-								<br />
-								<Button type="submit">등록</Button>
-							</form>
-						</>
-					) : null}
+					{openAddInput ? <TodoInput onSubmitHandler={onCreateSubmitHandler} /> : null}
 					<br />
 					<Todolist todoList={todoList} setTodoList={setTodoList} />
 				</SubContainer>

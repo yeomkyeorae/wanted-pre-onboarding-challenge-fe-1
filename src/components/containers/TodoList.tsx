@@ -1,8 +1,9 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { deleteTodo } from '../../_actions/todo_action';
 import { Todo } from '../interfaces';
+import TodoUpdateModal from './TodoUpdateModal';
 
 const Container = styled.div`
 	display: flex;
@@ -53,6 +54,8 @@ interface Props {
 }
 
 function Todolist({ todoList, setTodoList }: Props) {
+	const [selectedTodoId, setSelectedTodoId] = useState<string>('');
+
 	const dispatch = useDispatch<any>();
 	const token = window.localStorage.getItem('token');
 
@@ -69,6 +72,10 @@ function Todolist({ todoList, setTodoList }: Props) {
 		}
 	};
 
+	const updateHandler = (id: string) => {
+		setSelectedTodoId(id);
+	};
+
 	return (
 		<Container>
 			<Ul>
@@ -76,10 +83,21 @@ function Todolist({ todoList, setTodoList }: Props) {
 					return (
 						<LiContainer key={el.id}>
 							<Li>{el.title}</Li>
-							<Button color={'#00d8d6'}>수정</Button>
+							<Button color={'#00d8d6'} onClick={() => updateHandler(el.id)}>
+								수정
+							</Button>
 							<Button color={'#ff5e57'} onClick={() => deleteHandler(el.id)}>
 								삭제
 							</Button>
+							{selectedTodoId !== '' ? (
+								<TodoUpdateModal
+									setOpenEnroll={setSelectedTodoId}
+									setTodoList={setTodoList}
+									todoList={todoList}
+									id={selectedTodoId}
+									token={token}
+								/>
+							) : null}
 						</LiContainer>
 					);
 				})}

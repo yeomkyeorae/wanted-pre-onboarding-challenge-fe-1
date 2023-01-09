@@ -51,9 +51,10 @@ const Button = styled.div`
 interface Props {
 	todoList: { title: string; content: string; id: string; createdAt: string; updatedAt: string }[];
 	setTodoList: Dispatch<SetStateAction<Todo[]>>;
+	setSelectedTodo: Dispatch<SetStateAction<Todo>>;
 }
 
-function Todolist({ todoList, setTodoList }: Props) {
+function Todolist({ todoList, setTodoList, setSelectedTodo }: Props) {
 	const [selectedTodoId, setSelectedTodoId] = useState<string>('');
 
 	const dispatch = useDispatch<any>();
@@ -82,7 +83,7 @@ function Todolist({ todoList, setTodoList }: Props) {
 				{todoList?.map((el) => {
 					return (
 						<LiContainer key={el.id}>
-							<Li>{el.title}</Li>
+							<Li onClick={() => setSelectedTodo(el)}>{el.title}</Li>
 							<Button color={'#00d8d6'} onClick={() => updateHandler(el.id)}>
 								수정
 							</Button>

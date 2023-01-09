@@ -6,6 +6,7 @@ import { HistoryProps, Todo } from '../interfaces';
 import { createTodo, getTodos } from '../../_actions/todo_action';
 import Todolist from '../containers/TodoList';
 import TodoInput from '../containers/TodoInput';
+import TodoDetail from '../containers/TodoDetail';
 
 const Logout = styled.div`
 	position: absolute;
@@ -42,6 +43,7 @@ const Button = styled.button`
 function Todo({ history }: HistoryProps) {
 	const [openAddInput, setOpenAddInput] = useState(false);
 	const [todoList, setTodoList] = useState<Todo[]>([]);
+	const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
 	const dispatch = useDispatch<any>();
 	const token = window.localStorage.getItem('token');
@@ -94,10 +96,11 @@ function Todo({ history }: HistoryProps) {
 					</Button>
 					{openAddInput ? <TodoInput onSubmitHandler={onCreateSubmitHandler} /> : null}
 					<br />
-					<Todolist todoList={todoList} setTodoList={setTodoList} />
+					<Todolist todoList={todoList} setTodoList={setTodoList} setSelectedTodo={setSelectedTodo} />
 				</SubContainer>
 				<SubContainer>
 					<h1>상세</h1>
+					<TodoDetail todo={selectedTodo} />
 				</SubContainer>
 			</Container>
 		</>

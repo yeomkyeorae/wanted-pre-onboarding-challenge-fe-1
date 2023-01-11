@@ -1,44 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { HistoryProps, Todo } from '../interfaces';
-import { createTodo, getTodos } from '../../_actions/todo_action';
-import Todolist from '../containers/TodoList';
-import TodoInput from '../containers/TodoInput';
-import TodoDetail from '../containers/TodoDetail';
-
-const Logout = styled.div`
-	position: absolute;
-	top: 0;
-	right: 0;
-	color: #c0392b;
-	padding: 10px;
-	cursor: pointer;
-	font-weight: 800;
-`;
-
-const Container = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
-const SubContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	width: 50%;
-`;
-
-const Button = styled.button`
-	width: 100px;
-	background-color: #1e272e;
-	color: white;
-	border-radius: 15px;
-	cursor: pointer;
-`;
+import { HistoryProps, Todo } from '../../interfaces';
+import { createTodo, getTodos } from '../../../_actions/todo_action';
+import Todolist from '../list/TodoList';
+import TodoInput from '../input/TodoInput';
+import TodoDetail from '../detail/TodoDetail';
+import { Logout, Container, SubContainer, Button } from './TodoContainer.style';
 
 function Todo({ history }: HistoryProps) {
 	const [openAddInput, setOpenAddInput] = useState(false);

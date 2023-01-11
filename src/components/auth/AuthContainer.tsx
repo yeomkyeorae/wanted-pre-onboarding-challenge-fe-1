@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { loginUser, registerUser } from '../../_actions/user_action';
 import { HistoryProps } from '../interfaces';
+import { Container } from './AuthContainer.style';
 
-const Container = styled.div`
-	width: 280px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: #3498db;
-	text-align: center;
-`;
-
-function Login({ history }: HistoryProps) {
+function Auth({ history }: HistoryProps) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoginPage, setIsLoginPage] = useState(true);
@@ -116,4 +106,4 @@ function Login({ history }: HistoryProps) {
 	);
 }
 
-export default withRouter(Login);
+export default withRouter(Auth);

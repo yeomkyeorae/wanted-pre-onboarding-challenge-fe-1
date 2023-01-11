@@ -1,5 +1,5 @@
 import React from 'react';
-import { Todo } from '../interfaces';
+import { Todo } from '../../interfaces';
 
 function TodoDetail({ todo }: { todo: Todo | null }) {
 	if (todo === null) {

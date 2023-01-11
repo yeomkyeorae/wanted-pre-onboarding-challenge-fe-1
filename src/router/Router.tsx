@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import auth from './auth';
-import Login from './pages/LoginSignup';
-import Todo from './pages/Todo';
+import auth from '../auth/Auth';
+import Login from '../pages/auth/AuthPage';
+import Todo from '../pages/todo/TodoPage';
 
 function AppRouter() {
 	return (

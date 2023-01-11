@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { Todo } from '../interfaces';
-import { updateTodo } from '../../_actions/todo_action';
-import TodoInput from './TodoInput';
+import { Todo } from '../../interfaces';
+import { updateTodo } from '../../../_actions/todo_action';
+import TodoInput from '../input/TodoInput';
 
 const Modal = styled.div`
 	position: fixed;
@@ -66,7 +66,7 @@ interface Props {
 
 function TodoUpdateModal({ setOpenEnroll, setTodoList, todoList, id, token }: Props) {
 	const dispatch = useDispatch<any>();
-	console.log('token', token);
+
 	const todo = todoList.find((todo) => todo.id === id);
 	const { title, content } = todo;
 

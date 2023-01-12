@@ -4,14 +4,15 @@ import { withRouter } from 'react-router-dom';
 import { HistoryProps, Todo } from '../../interfaces';
 import { createTodo, getTodos } from '../../../_actions/todo_action';
 import Todolist from '../list/TodoList';
-import TodoInput from '../input/TodoInput';
+import TodoInput from '../../common/input/TodoInput';
 import TodoDetail from '../detail/TodoDetail';
+import CommonModal from '@/components/common/modal/CommonModal';
 import { Logout, Container, SubContainer, Button } from './TodoContainer.style';
 
 function Todo({ history }: HistoryProps) {
 	const [openAddInput, setOpenAddInput] = useState(false);
 	const [todoList, setTodoList] = useState<Todo[]>([]);
-	const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
+	const [selectedTodo, setSelectedTodo] = useState<Todo | boolean>(false);
 
 	const dispatch = useDispatch<any>();
 	const token = window.localStorage.getItem('token');
@@ -66,10 +67,12 @@ function Todo({ history }: HistoryProps) {
 					<br />
 					<Todolist todoList={todoList} setTodoList={setTodoList} setSelectedTodo={setSelectedTodo} />
 				</SubContainer>
-				<SubContainer>
-					<h1>상세</h1>
-					<TodoDetail todo={selectedTodo} />
-				</SubContainer>
+				{selectedTodo ? (
+					<CommonModal setIsOpenModal={setSelectedTodo}>
+						<h1>상세</h1>
+						<TodoDetail todo={selectedTodo} />
+					</CommonModal>
+				) : null}
 			</Container>
 		</>
 	);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Todo } from '../../interfaces';
 
-function TodoDetail({ todo }: { todo: Todo | null }) {
-	if (todo === null) {
+function TodoDetail({ todo }: { todo: Todo | boolean }) {
+	if (typeof todo === 'boolean') {
 		return <></>;
 	} else {
 		return (

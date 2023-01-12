@@ -12,6 +12,7 @@ interface Props {
 }
 
 function Todolist({ todoList, setTodoList, setSelectedTodo }: Props) {
+	const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 	const [selectedTodoId, setSelectedTodoId] = useState<string>('');
 
 	const dispatch = useDispatch<any>();
@@ -32,6 +33,7 @@ function Todolist({ todoList, setTodoList, setSelectedTodo }: Props) {
 
 	const updateHandler = (id: string) => {
 		setSelectedTodoId(id);
+		setIsOpenModal(true);
 	};
 
 	return (
@@ -47,9 +49,9 @@ function Todolist({ todoList, setTodoList, setSelectedTodo }: Props) {
 							<Button color={'#ff5e57'} onClick={() => deleteHandler(el.id)}>
 								삭제
 							</Button>
-							{selectedTodoId !== '' ? (
+							{isOpenModal ? (
 								<TodoUpdateModal
-									setOpenEnroll={setSelectedTodoId}
+									setIsOpenModal={setIsOpenModal}
 									setTodoList={setTodoList}
 									todoList={todoList}
 									id={selectedTodoId}

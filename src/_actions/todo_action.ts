@@ -1,16 +1,10 @@
 import axios from 'axios';
 import { CREATE_TODO, GET_TODOS, DELETE_TODO, UPDATE_TODO } from './types';
-import { Todo } from '../components/interfaces';
+import { Todo, TodoResponse, TodosResponse } from '../components/interfaces';
 
-export function createTodo(
-	body: { title: string; content: string },
-	token: string
-): {
-	type: string;
-	payload: Promise<{ data: Todo }>;
-} {
+export async function createTodo(body: { title: string; content: string }, token: string): Promise<TodoResponse> {
 	const headers = { Authorization: token };
-	const data = axios.post('/todos', body, { headers }).then((response: any) => response.data);
+	const data: { data: Todo } = (await axios.post('/todos', body, { headers })).data;
 
 	return {
 		type: CREATE_TODO,
@@ -18,12 +12,9 @@ export function createTodo(
 	};
 }
 
-export function getTodos(token: string): {
-	type: string;
-	payload: Promise<{ data: { title: string; content: string; id: string; createdAt: string; updatedAt: string }[] }>;
-} {
+export async function getTodos(token: string): Promise<TodosResponse> {
 	const headers = { Authorization: token };
-	const data = axios.get('/todos', { headers }).then((response: any) => response.data);
+	const data: { data: Todo[] } = (await axios.get('/todos', { headers })).data;
 
 	return {
 		type: GET_TODOS,
@@ -31,9 +22,9 @@ export function getTodos(token: string): {
 	};
 }
 
-export function deleteTodo(token: string, id: string): { type: string; payload: Promise<{ data: null }> } {
+export async function deleteTodo(token: string, id: string): Promise<{ type: string; payload: { data: null } }> {
 	const headers = { Authorization: token };
-	const data = axios.delete(`/todos/${id}`, { headers });
+	const data = (await axios.delete(`/todos/${id}`, { headers })).data;
 
 	return {
 		type: DELETE_TODO,
@@ -41,13 +32,13 @@ export function deleteTodo(token: string, id: string): { type: string; payload: 
 	};
 }
 
-export function updateTodo(
+export async function updateTodo(
 	token: string,
 	id: string,
 	body: { title: string; content: string }
-): { type: string; payload: Promise<Todo> } {
+): Promise<TodoResponse> {
 	const headers = { Authorization: token };
-	const data = axios.put(`/todos/${id}`, body, { headers }).then((response: any) => response.data);
+	const data: { data: Todo } = (await axios.put(`/todos/${id}`, body, { headers })).data;
 
 	return {
 		type: UPDATE_TODO,

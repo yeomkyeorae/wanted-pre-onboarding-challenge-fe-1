@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { loginUser, registerUser } from '../../_actions/user_action';
-import { HistoryProps } from '../interfaces';
+import { HistoryProps, UserResponse } from '../interfaces';
 import { Container } from './AuthContainer.style';
 
 function Auth({ history }: HistoryProps) {
@@ -47,10 +47,9 @@ function Auth({ history }: HistoryProps) {
 		}
 
 		const body = { email, password };
-
 		const requestFn = isLoginPage ? loginUser : registerUser;
 
-		dispatch(requestFn(body)).then((response: any) => {
+		dispatch(requestFn(body)).then((response: UserResponse) => {
 			const { message, token } = response.payload;
 			window.localStorage.setItem('token', token);
 

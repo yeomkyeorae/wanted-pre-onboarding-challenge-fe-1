@@ -1,11 +1,9 @@
 import axios from 'axios';
+import { UserResponse } from '../components/interfaces';
 import { LOGIN_USER, REGISTER_USER } from './types';
 
-export function loginUser(body: { email: string; password: string }): {
-	type: string;
-	payload: Promise<{ message: string; token: string }>;
-} {
-	const data = axios.post('/users/login', body).then((response: any) => response.data);
+export async function loginUser(body: { email: string; password: string }): Promise<UserResponse> {
+	const data = (await axios.post('/users/login', body)).data;
 
 	return {
 		type: LOGIN_USER,
@@ -13,11 +11,8 @@ export function loginUser(body: { email: string; password: string }): {
 	};
 }
 
-export function registerUser(body: { email: string; password: string }): {
-	type: string;
-	payload: Promise<{ success: boolean }>;
-} {
-	const data = axios.post('/users/create', body).then((response: any) => response.data);
+export async function registerUser(body: { email: string; password: string }): Promise<UserResponse> {
+	const data = (await axios.post('/users/create', body)).data;
 
 	return {
 		type: REGISTER_USER,

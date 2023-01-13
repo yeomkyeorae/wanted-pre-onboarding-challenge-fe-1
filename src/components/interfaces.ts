@@ -23,3 +23,25 @@ export interface TodoInputProps {
 	title?: string;
 	content?: string;
 }
+
+export interface TodoResponse {
+	type: string;
+	payload: {
+		data: Todo;
+	};
+}
+
+export interface TodosResponse {
+	type: string;
+	payload: {
+		data: Todo[];
+	};
+}
+
+export interface UserResponse {
+	type: string;
+	payload: {
+		message: string;
+		token: string;
+	};
+}

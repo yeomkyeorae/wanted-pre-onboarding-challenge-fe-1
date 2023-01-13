@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useDispatch } from 'react-redux';
-import { Todo } from '../../interfaces';
+import { Todo, TodoResponse } from '../../interfaces';
 import { updateTodo } from '../../../_actions/todo_action';
 import TodoInput from '../../common/input/TodoInput';
 import CommonModal from '../../common/modal/CommonModal';
@@ -27,7 +27,7 @@ function TodoUpdateModal({ setIsOpenModal, setTodoList, todoList, id, token }: P
 			content: todoContent,
 		};
 
-		dispatch(updateTodo(token, id, body)).then((response: any) => {
+		dispatch(updateTodo(token, id, body)).then((response: TodoResponse) => {
 			setTodoList(
 				todoList.map((todo) => {
 					if (todo.id === id) {

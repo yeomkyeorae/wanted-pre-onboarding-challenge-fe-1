@@ -16,7 +16,7 @@ export const Overlay = styled.div`
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.85);
+	background: rgba(0, 0, 0, 0.1);
 `;
 
 export const ModalContainer = styled.div`
@@ -32,8 +32,8 @@ export const ModalContainer = styled.div`
 	background: #fff;
 	box-sizing: border-box;
 	padding: 20px;
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
-	border-radius: 4px;
+	border: 1px solid black;
+	border-radius: 15px;
 	width: 520px;
 `;
 

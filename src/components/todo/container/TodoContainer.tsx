@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { HistoryProps, Todo } from '../../interfaces';
+import { HistoryProps, Todo, TodosResponse } from '../../interfaces';
 import { createTodo, getTodos } from '../../../_actions/todo_action';
 import Todolist from '../list/TodoList';
 import TodoInput from '../../common/input/TodoInput';
@@ -10,7 +10,7 @@ import CommonModal from '@/components/common/modal/CommonModal';
 import { Logout, Container, SubContainer, Button } from './TodoContainer.style';
 
 function Todo({ history }: HistoryProps) {
-	const [openAddInput, setOpenAddInput] = useState(false);
+	const [openAddInput, setOpenAddInput] = useState<boolean>(false);
 	const [todoList, setTodoList] = useState<Todo[]>([]);
 	const [selectedTodo, setSelectedTodo] = useState<Todo | boolean>(false);
 
@@ -18,7 +18,7 @@ function Todo({ history }: HistoryProps) {
 	const token = window.localStorage.getItem('token');
 
 	useEffect(() => {
-		dispatch(getTodos(token)).then((response: any) => {
+		dispatch(getTodos(token)).then((response: TodosResponse) => {
 			setTodoList(response.payload.data);
 		});
 	}, []);
@@ -69,7 +69,6 @@ function Todo({ history }: HistoryProps) {
 				</SubContainer>
 				{selectedTodo ? (
 					<CommonModal setIsOpenModal={setSelectedTodo}>
-						<h1>상세</h1>
 						<TodoDetail todo={selectedTodo} />
 					</CommonModal>
 				) : null}
